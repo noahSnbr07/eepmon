@@ -14,6 +14,7 @@ export default async function page() {
     const data = await database.user.findUnique({
         where: { id: auth?.id },
         include: { logs: true },
+        omit: { hash: true }
     });
 
     if (!data) return <></>;
