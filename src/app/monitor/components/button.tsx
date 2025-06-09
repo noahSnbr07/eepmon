@@ -1,6 +1,5 @@
 "use client";
 
-import APIResponse from "@/interfaces/api-response";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ClipLoader } from "react-spinners";
@@ -21,8 +20,7 @@ export default function Button({ running }: _props) {
         const url = `/api/monitor/${running ? "stop" : "start"}`;
         const options: RequestInit = { method: "POST" }
 
-        const response = await fetch(url, options);
-        const data: APIResponse = await response.json();
+        await fetch(url, options);
         router.refresh();
         setPending(false);
     }
