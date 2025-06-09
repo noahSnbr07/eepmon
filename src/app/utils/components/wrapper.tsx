@@ -1,15 +1,15 @@
 'use server';
+
 import { icon, mario } from "@/assets/assets";
 import { Settings } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
 interface _props {
-    children: React.ReactNode
+    children: React.ReactNode;
 }
 
-export default async function layout({ children }: _props) {
+export default async function Wrapper({ children }: _props) {
 
     return (
         <div className="size-full flex flex-col">

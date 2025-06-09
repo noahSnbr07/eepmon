@@ -54,8 +54,9 @@ export default function Card() {
 
         //evaluate request
         const data: APIResponse = await response.json();
-        if (data.success) router.push("/dashboard");
         setMessage(data.message);
+
+        if (data.success) return router.push("/dashboard");
 
         setPending(false);
     }

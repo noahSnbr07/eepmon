@@ -1,11 +1,14 @@
-'use client';
+"use server";
 
+import getAuth from "@/functions/get-auth";
 import Card from "./components/card";
+import { redirect } from "next/navigation";
 
-interface _props {
+export default async function page() {
 
-}
-export default function page({ }: _props) {
+    const auth = await getAuth();
+    console.log(auth);
+    if (auth) redirect("/dashboard");
 
 
     return (
