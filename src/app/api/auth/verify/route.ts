@@ -8,8 +8,6 @@ export async function POST(_request: NextRequest): Promise<NextResponse<APIRespo
     const token = cookieStore.get("eepmon-token")?.value as string;
     const auth = await getAuth(token);
 
-    console.log(`auth: `, auth)
-
     return NextResponse.json({
         data: { authenticated: auth !== null },
         message: "[empty message]",

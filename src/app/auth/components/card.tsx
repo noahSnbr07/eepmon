@@ -60,7 +60,6 @@ export default function Card() {
         setPending(false);
     }
 
-
     return (
         <form
             onSubmit={handleSubmit(onSubmit)}
