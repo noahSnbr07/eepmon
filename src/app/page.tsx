@@ -1,11 +1,11 @@
 'use server';
 
-interface _props {
+import getAuth from "@/functions/get-auth";
 
-}
+export default async function page() {
 
-export default async function page({ }: _props) {
-
+  const auth = await getAuth();
+  console.log(auth)
 
   return (
     <>
