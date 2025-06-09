@@ -1,0 +1,77 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  //base
+  id      String   @id @unique @default(uuid())
+  created DateTime @default(now())
+  updated DateTime @updatedAt
+
+  //props
+  name      String  @unique
+  hash      String
+  suspended Boolean @default(false)
+  superuser Boolean @default(false)
+  monitor   Monitor @relation(fields: [monitorId], references: [id])
+  profile   Profile @relation(fields: [profileId], references: [id])
+  logs      Log[]
+
+  //relations 
+  monitorId String @unique
+  profileId String @unique
+}
+
+model Profile {
+  //base
+  id      String   @id @unique @default(uuid())
+  created DateTime @default(now())
+  updated DateTime @updatedAt
+
+  //props
+  min       Int @default(6)
+  preferred Int @default(8)
+  max       Int @default(10)
+
+  //relations 
+  user User?
+}
+
+model Monitor {
+  //base
+  id      String   @id @unique @default(uuid())
+  created DateTime @default(now())
+  updated DateTime @updatedAt
+
+  //props
+  name    String   @default("My Monitor")
+  running Boolean  @default(false)
+  started DateTime
+  stopped DateTime
+
+  //relations
+  user User?
+}
+
+model Log {
+  //base
+  id      String   @id @unique @default(uuid())
+  created DateTime @default(now())
+  updated DateTime @updatedAt
+
+  //props
+  start    DateTime
+  stop     DateTime
+  duration Int
+  quality  Int      @default(5)
+
+  //relations 
+  User   User?   @relation(fields: [userId], references: [id])
+  userId String? @unique
+}
