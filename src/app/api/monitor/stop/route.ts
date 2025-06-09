@@ -50,7 +50,6 @@ export async function POST(): Promise<NextResponse<APIResponse>> {
         });
 
     } catch (error) {
-        console.error(error)
         return NextResponse.json({
             data: null,
             message: "Uncaught error",

@@ -7,7 +7,6 @@ import { redirect } from "next/navigation";
 export default async function page() {
 
     const auth = await getAuth();
-    console.log(auth);
     if (auth) redirect("/dashboard");
 
 

@@ -24,7 +24,6 @@ export default function Button({ running }: _props) {
         const response = await fetch(url, options);
         const data: APIResponse = await response.json();
         router.refresh();
-        console.log(data);
         setPending(false);
     }
 
