@@ -1,5 +1,4 @@
 export default interface Auth {
-    authenticated: boolean;
     id: string;
     created: Date;
     updated: Date;
