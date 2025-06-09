@@ -26,6 +26,9 @@ export default function Card() {
     //handle limitation
     const [pending, setPending] = useState<boolean>(false);
 
+    //display feedback
+    const [message, setMessage] = useState<string>("");
+
     //for redirection on success
     const router = useRouter();
 
@@ -52,6 +55,7 @@ export default function Card() {
         //evaluate request
         const data: APIResponse = await response.json();
         if (data.success) router.push("/dashboard");
+        setMessage(data.message);
 
         setPending(false);
     }
@@ -86,6 +90,7 @@ export default function Card() {
                 className="rounded-md bg-accent-background font-bold text-white px-4 py-2">
                 {pending ? <ClipLoader size={16} color='white' /> : "Submit"}
             </button>
+            {message.length > 0 && <p className='text-red-500 text-sm'> {message} </p>}
         </form>
     );
 }
