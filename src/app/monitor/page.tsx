@@ -1,6 +1,6 @@
 'use server';
 
-import { cat, mario } from "@/assets/assets";
+import { cat } from "@/assets/assets";
 import database from "@/config/database";
 import getAuth from "@/functions/get-auth";
 import Image from "next/image";

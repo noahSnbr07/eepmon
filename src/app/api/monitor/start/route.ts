@@ -2,9 +2,9 @@ import database from '@/config/database';
 import getAuth from '@/functions/get-auth';
 import APIResponse from '@/interfaces/api-response';
 import { revalidatePath } from 'next/cache';
-import { NextResponse, NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 
-export async function POST(_request: NextRequest): Promise<NextResponse<APIResponse>> {
+export async function POST(): Promise<NextResponse<APIResponse>> {
 
     const auth = await getAuth();
     if (!auth) return NextResponse.json({

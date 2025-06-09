@@ -9,22 +9,20 @@ interface _props {
 }
 
 export default function Status({ started, running }: _props) {
-
-    if (!running) return <b className="text-lg opacity-50"> 00:00 </b>
-
     const [duration, setDuration] = useState<number>(0);
 
-    useEffect(function () {
+    useEffect(() => {
+        if (!running) return;
 
-        const updateInterval = setInterval(function () {
-            const difference = differenceInSeconds(new Date(), started)
+        const updateInterval = setInterval(() => {
+            const difference = differenceInSeconds(new Date(), started);
             setDuration(difference);
         }, 1000);
 
-        return () => {
-            clearInterval(updateInterval)
-        }
-    }, [])
+        return () => clearInterval(updateInterval);
+    }, [running, started]);
+
+    if (!running) return <b className="text-lg opacity-50"> 00:00 </b>
 
     const hours = Math.floor(duration / 3600).toString().padStart(2, '0');
     const minutes = Math.floor((duration % 3600) / 60).toString().padStart(2, '0');
