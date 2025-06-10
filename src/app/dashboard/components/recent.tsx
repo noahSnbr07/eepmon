@@ -1,4 +1,5 @@
 'use client';
+import getFormattedDuration from "@/functions/get-formatted-duration";
 import { Log } from "@prisma/client";
 import { motion } from "framer-motion";
 
@@ -19,10 +20,9 @@ export default function Recent({ logs }: _props) {
                     transition={{ delay: _index * .1, type: "keyframes" }}
                     key={_index}
                     className="odd:bg-stack flex gap-2 py-2 px-4 justify-between items-center">
-                    <b> {log.duration} </b>
+                    <b> {getFormattedDuration({ duration: log.duration })} </b>
                     <i className="text-sm opacity-50">
                         {log.created.toLocaleDateString()}
-
                     </i>
                 </motion.div>
             )}

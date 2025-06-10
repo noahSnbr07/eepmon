@@ -2,6 +2,7 @@
 
 import { differenceInSeconds } from "date-fns";
 import { useEffect, useState } from "react";
+import getFormattedDuration from "@/functions/get-formatted-duration";
 
 interface _props {
     started: string;
@@ -24,12 +25,8 @@ export default function Status({ started, running }: _props) {
 
     if (!running) return <b className="text-lg opacity-50"> 00:00 </b>
 
-    const hours = Math.floor(duration / 3600).toString().padStart(2, '0');
-    const minutes = Math.floor((duration % 3600) / 60).toString().padStart(2, '0');
-    const seconds = Math.floor(duration % 60).toString().padStart(2, '0');
-    const time = `${hours}:${minutes}:${seconds}`;
 
     return (
-        <b className="text-lg opacity-50"> {time} </b>
+        <b className="text-lg opacity-50"> {getFormattedDuration({ duration })} </b>
     );
 }
