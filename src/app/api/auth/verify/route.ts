@@ -1,8 +1,8 @@
 import getAuth from '@/functions/get-auth';
 import APIResponse from '@/interfaces/api-response';
-import { NextResponse, NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 
-export async function GET(_request: NextRequest): Promise<NextResponse<APIResponse>> {
+export async function GET(): Promise<NextResponse<APIResponse>> {
     const auth = await getAuth();
 
     return NextResponse.json({
