@@ -25,7 +25,6 @@ export default function Status({ started, running }: _props) {
 
     if (!running) return <b className="text-lg opacity-50"> 00:00 </b>
 
-
     return (
         <b className="text-lg opacity-50"> {getFormattedDuration({ duration })} </b>
     );

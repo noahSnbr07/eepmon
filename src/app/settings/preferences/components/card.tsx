@@ -58,9 +58,7 @@ export default function Card({ defaultMin, defaultPreferred, defaultMax }: _prop
         const url = "/api/profile/update";
         const options: RequestInit = { method: "POST", body: form }
 
-        const response = await fetch(url, options)
-        const data: APIResponse = await response.json();
-        console.log(data)
+        await fetch(url, options)
 
         setPending(false);
     }
