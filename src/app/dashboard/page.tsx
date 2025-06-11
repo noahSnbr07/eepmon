@@ -6,6 +6,7 @@ import CardWrapper from "./components/card-wrapper";
 import MonitorLink from "./components/monitor-link";
 import getAuth from "@/functions/get-auth";
 import Recent from "./components/recent";
+import Statistics from "./components/statistics";
 
 export default async function page() {
 
@@ -29,6 +30,10 @@ export default async function page() {
                 <CardWrapper
                     name="Recent 5 Logs">
                     <Recent logs={data?.logs} />
+                </CardWrapper>
+                <CardWrapper
+                    name="Statistics">
+                    <Statistics logs={data.logs} />
                 </CardWrapper>
             </div>
         </Wrapper>
