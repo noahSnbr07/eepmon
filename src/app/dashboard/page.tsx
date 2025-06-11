@@ -7,6 +7,7 @@ import MonitorLink from "./components/monitor-link";
 import getAuth from "@/functions/get-auth";
 import Recent from "./components/recent";
 import Statistics from "./components/statistics";
+import MonitorCommands from "./components/monitor-commands";
 
 export default async function page() {
 
@@ -14,7 +15,7 @@ export default async function page() {
 
     const data = await database.user.findUnique({
         where: { id: auth?.id },
-        include: { logs: { orderBy: { duration: "desc" } } },
+        include: { logs: { orderBy: { duration: "desc" } }, monitor: true },
         omit: { hash: true }
     });
 
@@ -25,7 +26,8 @@ export default async function page() {
             <div className="flex flex-col gap-4 p-4 size-full">
                 <CardWrapper
                     name="Monitor">
-                    <MonitorLink running />
+                    <MonitorLink running={data.monitor.running} />
+                    <MonitorCommands running={data.monitor.running} />
                 </CardWrapper>
                 <CardWrapper
                     name="Recent 5 Logs">
