@@ -1,8 +1,10 @@
 "use client";
 
+import APIResponse from "@/interfaces/api-response";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ClipLoader } from "react-spinners";
+import { toast } from "react-toastify";
 
 interface _props {
     running: boolean;
@@ -20,7 +22,9 @@ export default function Button({ running }: _props) {
         const url = `/api/monitor/${running ? "stop" : "start"}`;
         const options: RequestInit = { method: "POST" }
 
-        await fetch(url, options);
+        const response = await fetch(url, options);
+        const data: APIResponse = await response.json();
+        toast(data.message);
         router.refresh();
         setPending(false);
     }
