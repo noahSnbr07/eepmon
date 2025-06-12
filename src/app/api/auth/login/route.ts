@@ -75,6 +75,7 @@ export async function POST(_request: NextRequest): Promise<NextResponse<APIRespo
 
 
     } catch (error) {
+        console.log(error);
         return NextResponse.json({
             success: false,
             data: null,

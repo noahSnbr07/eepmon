@@ -1,8 +1,10 @@
 'use client';
 
 import Spinner from "@/app/utils/components/spinner";
+import APIResponse from "@/interfaces/api-response";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 interface _props {
     running: boolean;
@@ -17,7 +19,10 @@ export default function MonitorCommands({ }: _props) {
         if (pending) return;
         setPending(true);
 
-        await fetch(`/api/monitor/${command}`, { method: "POST" });
+        const response = await fetch(`/api/monitor/${command}`, { method: "POST" });
+        const data: APIResponse = await response.json();
+
+        toast(data.message)
         router.refresh();
         setPending(false);
     }
