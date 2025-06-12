@@ -1,8 +1,10 @@
 'use client';
 import Spinner from "@/app/utils/components/spinner";
+import APIResponse from "@/interfaces/api-response";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { z as zod } from "zod";
 
 const schema = zod.object({
@@ -57,7 +59,9 @@ export default function Card({ defaultMin, defaultPreferred, defaultMax }: _prop
         const url = "/api/profile/update";
         const options: RequestInit = { method: "POST", body: form }
 
-        await fetch(url, options)
+        const response = await fetch(url, options)
+        const data: APIResponse = await response.json();
+        toast(data.message);
 
         setPending(false);
     }

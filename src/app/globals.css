@@ -30,3 +30,7 @@ button:hover,
 a:hover {
   cursor: pointer;
 }
+
+* {
+  transition: 250ms ease-out;
+}

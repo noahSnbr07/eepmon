@@ -30,11 +30,15 @@ export default function MonitorCommands({ }: _props) {
     return (
         <div className="flex gap-2">
             <button
+                style={{ opacity: pending ? .5 : 1 }}
+                disabled={pending}
                 onClick={() => submitCommand("start")}
                 className="size-full bg-stack p-2 rounded-md font-bold">
                 {pending ? <Spinner /> : "Start"}
             </button>
             <button
+                style={{ opacity: pending ? .5 : 1 }}
+                disabled={pending}
                 onClick={() => submitCommand("stop")}
                 className="size-full bg-stack p-2 rounded-md font-bold">
                 {pending ? <Spinner /> : "Stop"}
