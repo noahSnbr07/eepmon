@@ -23,6 +23,13 @@ export async function POST(): Promise<NextResponse<APIResponse>> {
             success: false
         });
 
+        if (!target.running) return NextResponse.json({
+            data: null,
+            message: "Monitor not running",
+            status: 500,
+            success: false
+        });
+
         const duration = differenceInSeconds(new Date(), target.started);
         const start = target.started;
         const stop = target.stopped;
