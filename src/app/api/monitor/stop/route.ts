@@ -34,9 +34,18 @@ export async function POST(): Promise<NextResponse<APIResponse>> {
         const start = target.started;
         const stop = target.stopped;
 
+
         await database.monitor.update({
             where: { id: auth.monitorId },
             data: { stopped: new Date(), running: false }
+        });
+
+        const invalidDuration = duration <= 0;
+        if (invalidDuration) return NextResponse.json({
+            data: null,
+            message: "Delay not exceeded. Monitor stopped",
+            status: 400,
+            success: false
         });
 
         const newLog = await database.log.create({
