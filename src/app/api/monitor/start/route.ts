@@ -33,7 +33,6 @@ export async function POST(): Promise<NextResponse<APIResponse>> {
         });
 
         const startTime: Date = addMinutes(new Date(), profile.delay * 60);
-        console.log(startTime.toLocaleTimeString(), new Date().toLocaleTimeString())
 
         await database.monitor.update({
             where: { id: auth.monitorId },

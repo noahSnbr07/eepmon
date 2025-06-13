@@ -17,7 +17,6 @@ export async function POST(_request: NextRequest): Promise<NextResponse<APIRespo
     const validPreferred = preferred > min && preferred < max;
     const validMax = max >= 4 && max > min && max > preferred;
     const validDelay = delay >= 0 && delay <= 1;
-    console.log(delay)
 
     //evaluate previous conditions
     if (!validMin || !validPreferred || !validMax || !validDelay) return NextResponse.json({
@@ -63,7 +62,6 @@ export async function POST(_request: NextRequest): Promise<NextResponse<APIRespo
 
         //catch errors
     } catch (error) {
-        console.error(error)
         return NextResponse.json({
             data: null,
             message: "Uncaught error",
