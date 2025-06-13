@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Profile" ADD COLUMN     "delay" INTEGER NOT NULL DEFAULT 0;

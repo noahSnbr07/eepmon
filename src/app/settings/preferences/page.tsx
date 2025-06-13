@@ -14,6 +14,7 @@ export default async function page() {
     return (
         <div className="size-full">
             <Card
+                defaultDelay={data?.delay || 0}
                 defaultMin={data?.min || 4}
                 defaultMax={data?.max || 6}
                 defaultPreferred={data?.preferred || 8}

@@ -17,6 +17,9 @@ const schema = zod.object({
     maxHours: zod.coerce.number()
         .min(4, { message: "Minimum is 4 hours" })
         .max(8, { message: "Maximum is 8 hours" }),
+    delay: zod.coerce.number()
+        .min(0, { message: "Minimum is 0 hours" })
+        .max(1, { message: "Maximum is 1 hour" }),
 });
 
 type FormData = zod.infer<typeof schema>;
@@ -25,9 +28,10 @@ interface _props {
     defaultMin: number;
     defaultPreferred: number;
     defaultMax: number;
+    defaultDelay: number;
 }
 
-export default function Card({ defaultMin, defaultPreferred, defaultMax }: _props) {
+export default function Card({ defaultMin, defaultPreferred, defaultMax, defaultDelay }: _props) {
     const {
         register,
         handleSubmit,
@@ -39,6 +43,7 @@ export default function Card({ defaultMin, defaultPreferred, defaultMax }: _prop
             minHours: defaultMin,
             preferredHours: defaultPreferred,
             maxHours: defaultMax,
+            delay: defaultDelay,
         }
     });
 
@@ -55,6 +60,7 @@ export default function Card({ defaultMin, defaultPreferred, defaultMax }: _prop
         form.append("min", String(formData.minHours));
         form.append("preferred", String(formData.preferredHours));
         form.append("max", String(formData.maxHours));
+        form.append("delay", String(formData.delay));
 
         const url = "/api/profile/update";
         const options: RequestInit = { method: "POST", body: form }
@@ -73,6 +79,7 @@ export default function Card({ defaultMin, defaultPreferred, defaultMax }: _prop
             <div className="rounded-md flex flex-col gap-2 bg-stack p-4">
                 <label htmlFor="minHours">Minimum Hours: {formValues.minHours}</label>
                 <input
+                    defaultValue={defaultMin}
                     min={4}
                     max={8}
                     {...register("minHours")}
@@ -82,6 +89,7 @@ export default function Card({ defaultMin, defaultPreferred, defaultMax }: _prop
             <div className="rounded-md flex flex-col gap-2 bg-stack p-4">
                 <label htmlFor="preferredHours">Preferred Hours: {formValues.preferredHours}</label>
                 <input
+                    defaultValue={defaultPreferred}
                     min={4}
                     max={8}
                     {...register("preferredHours")}
@@ -91,17 +99,30 @@ export default function Card({ defaultMin, defaultPreferred, defaultMax }: _prop
             <div className="rounded-md flex flex-col gap-2 bg-stack p-4">
                 <label htmlFor="maxHours">Maximum Hours: {formValues.maxHours}</label>
                 <input
+                    defaultValue={defaultMax}
                     min={4}
                     max={8}
                     {...register("maxHours")}
                     type="range" />
                 {errors.maxHours && <i className="text-red-500 text-sm"> {errors.maxHours.message} </i>}
             </div>
+            <div className="rounded-md flex flex-col gap-2 bg-stack p-4">
+                <label htmlFor="maxHours">Monitor Delay: {formValues.delay}</label>
+                <input
+                    defaultValue={defaultDelay}
+                    step={.1}
+                    min={0}
+                    max={1}
+                    {...register("delay")}
+                    type="range" />
+                {errors.delay && <i className="text-red-500 text-sm"> {errors.delay.message} </i>}
+            </div>
             <div className="p-4 bg-stack rounded-md">
                 <h3 className="font-bold mb-2">Current Values:</h3>
                 <p>Minimum: {defaultMin} hours</p>
                 <p>Preferred: {defaultPreferred} hours</p>
                 <p>Maximum: {defaultMax} hours</p>
+                <p>Delay: {defaultDelay} hours</p>
             </div>
             <button
                 className="p-4 bg-stack rounded-md font-bold"

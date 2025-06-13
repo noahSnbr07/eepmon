@@ -10,15 +10,18 @@ export async function POST(_request: NextRequest): Promise<NextResponse<APIRespo
     const min = Number(formData.get("min"));
     const preferred = Number(formData.get("preferred"));
     const max = Number(formData.get("max"));
+    const delay = Number(formData.get("delay"));
 
     //set conditions
     const validMin = min >= 4 && min <= 8 && min < preferred;
     const validPreferred = preferred > min && preferred < max;
     const validMax = max >= 4 && max > min && max > preferred;
+    const validDelay = delay >= 0 && delay <= 1;
+    console.log(delay)
 
     //evaluate previous conditions
-    if (!validMin || !validPreferred || !validMax) return NextResponse.json({
-        data: { validMin, validPreferred, validMax },
+    if (!validMin || !validPreferred || !validMax || !validDelay) return NextResponse.json({
+        data: { validMin, validPreferred, validMax, validDelay },
         message: "Invalid form fields",
         status: 400,
         success: false,
@@ -47,7 +50,7 @@ export async function POST(_request: NextRequest): Promise<NextResponse<APIRespo
         //update preferences
         await database.profile.update({
             where: { id: auth.profileId },
-            data: { min, preferred, max },
+            data: { min, preferred, max, delay },
         });
 
         //return success
@@ -60,6 +63,7 @@ export async function POST(_request: NextRequest): Promise<NextResponse<APIRespo
 
         //catch errors
     } catch (error) {
+        console.error(error)
         return NextResponse.json({
             data: null,
             message: "Uncaught error",
