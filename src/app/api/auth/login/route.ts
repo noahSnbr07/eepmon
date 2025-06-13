@@ -36,6 +36,13 @@ export async function POST(_request: NextRequest): Promise<NextResponse<APIRespo
             status: 404,
         });
 
+        if (target.suspended) return NextResponse.json({
+            success: false,
+            data: null,
+            message: "User suspended",
+            status: 403,
+        });
+
         const { hash, ...userSafe } = target;
 
         const match: boolean = await compare(password, hash);
