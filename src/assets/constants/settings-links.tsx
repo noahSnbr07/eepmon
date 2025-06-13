@@ -8,7 +8,7 @@ interface SettingsEntry {
 }
 
 const settingsEntries: SettingsEntry[] = [
-    { id: 0, icon: <User />, href: "me", name: "Account" },
+    { id: 0, icon: <User />, href: "account", name: "Account" },
     { id: 1, icon: <Settings2 />, href: "preferences", name: "Preferences" },
     { id: 2, icon: <Clock />, href: "monitor", name: "My Monitor" },
 ];
