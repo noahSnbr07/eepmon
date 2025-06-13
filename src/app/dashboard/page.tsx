@@ -8,6 +8,8 @@ import getAuth from "@/functions/get-auth";
 import Recent from "./components/recent";
 import Statistics from "./components/statistics";
 import MonitorCommands from "./components/monitor-commands";
+import Chart from "./components/chart";
+import MinifiedLog from "@/interfaces/minified-log";
 
 export default async function page() {
 
@@ -28,6 +30,10 @@ export default async function page() {
                     name="Monitor">
                     <MonitorLink running={data.monitor.running} />
                     <MonitorCommands running={data.monitor.running} />
+                </CardWrapper>
+                <CardWrapper
+                    name="Chart">
+                    <Chart logs={data.logs as MinifiedLog[]} />
                 </CardWrapper>
                 <CardWrapper
                     name="Recent 5 Logs">
