@@ -3,6 +3,7 @@ import getAuth from '@/functions/get-auth';
 import APIResponse from '@/interfaces/api-response';
 import { revalidatePath } from 'next/cache';
 import { NextResponse } from 'next/server';
+import { addMinutes } from "date-fns";
 
 export async function POST(): Promise<NextResponse<APIResponse>> {
 
@@ -11,6 +12,14 @@ export async function POST(): Promise<NextResponse<APIResponse>> {
         data: null,
         message: "Error during auth process",
         status: 403,
+        success: false
+    });
+
+    const profile = await database.profile.findUnique({ where: { id: auth.profileId }, select: { delay: true } });
+    if (!profile) return NextResponse.json({
+        data: null,
+        message: "Profile not found",
+        status: 404,
         success: false
     });
 
@@ -23,9 +32,12 @@ export async function POST(): Promise<NextResponse<APIResponse>> {
             success: false
         });
 
+        const startTime: Date = addMinutes(new Date(), profile.delay * 60);
+        console.log(startTime.toLocaleTimeString(), new Date().toLocaleTimeString())
+
         await database.monitor.update({
             where: { id: auth.monitorId },
-            data: { started: new Date(), running: true }
+            data: { started: startTime, running: true }
         });
 
         return NextResponse.json({
