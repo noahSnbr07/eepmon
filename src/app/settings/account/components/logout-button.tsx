@@ -23,7 +23,7 @@ export default function LogoutButton() {
             const data: APIResponse = await response.json();
             toast(data.message);
             router.push("/auth");
-        } catch (error) {
+        } catch {
             toast("Something went wrong")
         } finally {
             setPending(false);
