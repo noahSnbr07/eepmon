@@ -1,7 +1,7 @@
 'use client';
 
 import MinifiedLog from "@/interfaces/minified-log";
-import { XAxis, YAxis, ResponsiveContainer, CartesianGrid, Area, AreaChart, Tooltip } from "recharts";
+import { XAxis, ResponsiveContainer, CartesianGrid, Area, AreaChart } from "recharts";
 
 interface _props {
     logs: MinifiedLog[];
