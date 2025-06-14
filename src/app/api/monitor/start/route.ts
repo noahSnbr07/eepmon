@@ -3,7 +3,7 @@ import getAuth from '@/functions/get-auth';
 import APIResponse from '@/interfaces/api-response';
 import { revalidatePath } from 'next/cache';
 import { NextResponse } from 'next/server';
-import { addMinutes } from "date-fns";
+import { addHours, addMinutes } from "date-fns";
 
 export async function POST(): Promise<NextResponse<APIResponse>> {
 

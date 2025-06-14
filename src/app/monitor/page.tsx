@@ -25,7 +25,7 @@ export default async function page() {
                 title="Cat" />
             <Status
                 running={monitor.running}
-                started={monitor.started.toISOString()} />
+                started={new Date(monitor.started).toISOString()} />
             <Button running={monitor.running} />
         </div>
     );

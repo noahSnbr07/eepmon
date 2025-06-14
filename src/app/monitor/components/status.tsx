@@ -1,8 +1,8 @@
 'use client';
 
-import { differenceInSeconds } from "date-fns";
+import getTimer from "@/functions/get-timer";
+import { differenceInSeconds, intervalToDuration } from "date-fns";
 import { useEffect, useState } from "react";
-import getFormattedDuration from "@/functions/get-formatted-duration";
 
 interface _props {
     started: string;
@@ -16,16 +16,16 @@ export default function Status({ started, running }: _props) {
         if (!running) return;
 
         const updateInterval = setInterval(() => {
-            const difference = differenceInSeconds(new Date(), started);
+            const difference = differenceInSeconds(new Date(), new Date(started));
             setDuration(difference);
         }, 1000);
 
         return () => clearInterval(updateInterval);
     }, [running, started]);
 
-    if (!running) return <b className="text-lg opacity-50"> 00:00 </b>
-
     return (
-        <b className="text-lg opacity-50"> {getFormattedDuration({ duration })} </b>
+        <b className="text-lg opacity-50">
+            {running ? getTimer(duration) : '00:00:00'}
+        </b>
     );
 }
