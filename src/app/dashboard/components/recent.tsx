@@ -14,7 +14,7 @@ export default async function Recent({ logs }: _props) {
             {logs.slice(0, 5).map((log, _index) =>
                 <div
                     key={_index}
-                    className="odd:bg-stack first:rounded-t-sm last:rounded-b-sm flex gap-2 py-2 px-4 justify-between items-center">
+                    className="odd:bg-stack first:rounded-t-lg last:rounded-b-lg flex gap-2 py-2 px-4 justify-between items-center">
                     <b> {getFormattedDuration({ duration: log.duration })} </b>
                     <i className="text-sm opacity-50">
                         {log.created.toLocaleDateString()}

@@ -9,7 +9,6 @@ interface _props {
 }
 
 export default async function Statistics({ logs }: _props) {
-
     const average = getAverageDuration({ logs });
     const averageFormatted = getFormattedDuration({ duration: average });
 
@@ -18,19 +17,33 @@ export default async function Statistics({ logs }: _props) {
     const longest = sorted[sorted.length - 1];
 
     return (
-        <div className="flex flex-col">
-            <span className="flex gap-2">
-                <b> Average: {averageFormatted} </b>
-            </span>
-            <span className="flex gap-2">
-                <b> Shortest: {getFormattedDuration(shortest)} </b>
-            </span>
-            <span className="flex gap-2">
-                <b> Longest: {getFormattedDuration(longest)} </b>
-            </span>
-            <span className="flex gap-2">
-                <b> Total: {logs.length} logs </b>
-            </span>
+        <div className="rounded-lg border-stack border-2">
+            <table className="size-full rounded-lg">
+                <thead className="text-left">
+                    <tr className="bg-stack">
+                        <th className="px-4 py-2">Metric</th>
+                        <th className="px-4 py-2">Value</th>
+                    </tr>
+                </thead>
+                <tbody className="divide-stack divide-dashed divide-y-2">
+                    <tr>
+                        <td className="px-4 py-2">Average</td>
+                        <td className="px-4 py-2">{averageFormatted}</td>
+                    </tr>
+                    <tr>
+                        <td className="px-4 py-2">Shortest</td>
+                        <td className="px-4 py-2">{getFormattedDuration(shortest)}</td>
+                    </tr>
+                    <tr>
+                        <td className="px-4 py-2">Longest</td>
+                        <td className="px-4 py-2">{getFormattedDuration(longest)}</td>
+                    </tr>
+                    <tr>
+                        <td className="px-4 py-2">Total Logs</td>
+                        <td className="px-4 py-2">{logs.length}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     );
 }

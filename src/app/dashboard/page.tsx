@@ -32,15 +32,15 @@ export default async function page() {
                     <MonitorCommands running={data.monitor.running} />
                 </CardWrapper>
                 <CardWrapper
-                    name="Chart">
+                    name="Duration Chart">
                     <Chart logs={data.logs as MinifiedLog[]} />
                 </CardWrapper>
                 <CardWrapper
-                    name="Recent 5 Logs">
+                    name="Recent Logs">
                     <Recent logs={data?.logs} />
                 </CardWrapper>
                 <CardWrapper
-                    name="Statistics">
+                    name="Calculated Statistics">
                     <Statistics logs={data.logs} />
                 </CardWrapper>
             </div>
