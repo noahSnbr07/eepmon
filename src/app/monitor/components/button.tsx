@@ -32,7 +32,7 @@ export default function Button({ running }: _props) {
     return (
         <button
             onClick={onCLickHandler}
-            className="px-16 py-2 text-lg font-bold bg-stack rounded-md">
+            className="w-3xs py-2 text-lg font-bold bg-stack rounded-md">
             {pending ? <ClipLoader size={16} color="white" /> : text}
         </button>
     );
