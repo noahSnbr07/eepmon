@@ -1,15 +1,16 @@
 'use client';
 
 import getTimer from "@/functions/get-timer";
-import { differenceInSeconds, intervalToDuration } from "date-fns";
+import { differenceInSeconds } from "date-fns";
 import { useEffect, useState } from "react";
 
 interface _props {
     started: string;
     running: boolean;
+    delay: number;
 }
 
-export default function Status({ started, running }: _props) {
+export default function Status({ started, running, delay }: _props) {
     const [duration, setDuration] = useState<number>(0);
 
     useEffect(() => {
@@ -24,8 +25,9 @@ export default function Status({ started, running }: _props) {
     }, [running, started]);
 
     return (
-        <b className="text-lg opacity-50">
-            {running ? getTimer(duration) : '00:00:00'}
+        <b className="opacity-50 flex items-center gap-2 flex-col">
+            <b className="text-lg">{running ? getTimer(duration) : '00:00:00'}</b>
+            <i className="text-sm"> delay: {delay * 60} Minutes </i>
         </b>
     );
 }
