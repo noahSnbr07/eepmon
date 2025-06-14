@@ -1,7 +1,7 @@
 'use client';
 
 import MinifiedLog from "@/interfaces/minified-log";
-import { XAxis, YAxis, ResponsiveContainer, CartesianGrid, Area, AreaChart } from "recharts";
+import { XAxis, YAxis, ResponsiveContainer, CartesianGrid, Area, AreaChart, Tooltip } from "recharts";
 
 interface _props {
     logs: MinifiedLog[];
@@ -24,9 +24,11 @@ export default function Chart({ logs }: _props) {
                 <CartesianGrid
                     stroke="#7d7d7d40"
                     strokeDasharray="5 5" />
-                <XAxis dataKey="created" />
-                <YAxis dataKey="duration" />
-                <YAxis dataKey="quality" />
+                <XAxis
+                    textAnchor="start"
+                    interval={0}
+                    fontSize={12}
+                    dataKey="created" />
                 <Area
                     animationDuration={2500}
                     stroke="#ffffff"
