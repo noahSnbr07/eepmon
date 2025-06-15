@@ -33,7 +33,7 @@ export default function MutationButton({ name, icon, endpoint, className, reload
             if (reload) router.refresh();
 
             //handle error
-        } catch (error) {
+        } catch {
             toast("Unexpected client error");
 
             //reset state

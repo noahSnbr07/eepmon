@@ -1,7 +1,6 @@
 'use client';
 
 import MutationButton from "@/utils/components/mutation-button";
-import { Ban, Play } from "lucide-react";
 
 interface _props {
     running: boolean;

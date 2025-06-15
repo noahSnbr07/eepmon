@@ -7,7 +7,6 @@ import Image from "next/image";
 import { redirect } from "next/navigation";
 import Status from "./components/status";
 import MutationButton from "@/utils/components/mutation-button";
-import { Moon } from "lucide-react";
 
 export default async function page() {
 
