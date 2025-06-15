@@ -1,6 +1,6 @@
 'use client';
 
-import Spinner from "@/app/utils/components/spinner";
+import Spinner from "@/utils/components/spinner";
 import APIResponse from "@/interfaces/api-response";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

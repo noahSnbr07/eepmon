@@ -1,6 +1,6 @@
 'use server';
 import React from "react";
-import Wrapper from "../utils/components/wrapper";
+import Wrapper from "../../utils/components/wrapper";
 
 interface _props {
     children: React.ReactNode;

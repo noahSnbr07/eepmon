@@ -2,8 +2,9 @@
 
 import database from "@/config/database";
 import getAuth from "@/functions/get-auth";
+import MutationButton from "@/utils/components/mutation-button";
+import { DatabaseBackup } from "lucide-react";
 import { redirect } from "next/navigation";
-import ResetButton from "./components/reset-button";
 
 export default async function page() {
 
@@ -15,7 +16,11 @@ export default async function page() {
 
     return (
         <div className="size-full flex flex-col gap-4 p-4">
-            <ResetButton />
+            <MutationButton
+                endpoint="/api/monitor/reset"
+                icon={<DatabaseBackup />}
+                name="Reset Monitor"
+            />
         </div>
     );
 }

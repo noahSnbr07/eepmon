@@ -1,7 +1,7 @@
 'use server';
 
 import database from "@/config/database";
-import Wrapper from "../utils/components/wrapper";
+import Wrapper from "../../utils/components/wrapper";
 import CardWrapper from "./components/card-wrapper";
 import MonitorLink from "./components/monitor-link";
 import getAuth from "@/functions/get-auth";
