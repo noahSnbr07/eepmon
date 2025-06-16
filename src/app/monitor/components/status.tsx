@@ -16,11 +16,13 @@ export default function Status({ started, running, delay }: _props) {
     useEffect(() => {
         if (!running) return;
 
+        //update duration every 1000ms
         const updateInterval = setInterval(() => {
             const difference = differenceInSeconds(new Date(), new Date(started));
             setDuration(difference);
         }, 1000);
 
+        //clean-up function
         return () => clearInterval(updateInterval);
     }, [running, started]);
 

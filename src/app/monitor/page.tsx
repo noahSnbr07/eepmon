@@ -10,6 +10,7 @@ import MutationButton from "@/utils/components/mutation-button";
 
 export default async function page() {
 
+    //retrieve related data
     const auth = await getAuth();
     const monitor = await database.monitor.findUnique({ where: { id: auth?.monitorId } });
     const profile = await database.profile.findUnique({ where: { id: auth?.profileId } });

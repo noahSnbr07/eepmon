@@ -56,15 +56,18 @@ export default function Card({ defaultMin, defaultPreferred, defaultMax, default
         if (pending) return;
         setPending(true);
 
+        //create form
         const form = new FormData();
         form.append("min", String(formData.minHours));
         form.append("preferred", String(formData.preferredHours));
         form.append("max", String(formData.maxHours));
         form.append("delay", String(formData.delay));
 
+        //define fetch parameters
         const url = "/api/profile/update";
         const options: RequestInit = { method: "POST", body: form }
 
+        //validate api response
         const response = await fetch(url, options)
         const data: APIResponse = await response.json();
         toast(data.message);

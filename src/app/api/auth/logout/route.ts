@@ -4,9 +4,12 @@ import { NextResponse } from 'next/server';
 
 export async function POST(): Promise<NextResponse<APIResponse>> {
 
+    //get cookies
     const cookieStore = await cookies();
 
     try {
+
+        //destroy token
         cookieStore.delete("eepmon-token");
         return NextResponse.json({
             data: null,
@@ -17,6 +20,7 @@ export async function POST(): Promise<NextResponse<APIResponse>> {
         });
     } catch (error) {
 
+        //catch errors
         return NextResponse.json({
             data: null,
             error: error instanceof Error ? error : "Uncaught error",

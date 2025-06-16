@@ -5,6 +5,7 @@ import { NextResponse } from 'next/server';
 
 export async function POST(): Promise<NextResponse<APIResponse>> {
 
+    //retrieve authentication
     const auth = await getAuth();
     if (!auth) return NextResponse.json({
         data: null,
@@ -15,6 +16,7 @@ export async function POST(): Promise<NextResponse<APIResponse>> {
 
     try {
 
+        //retrieve target monitor
         const monitor = await database.monitor.findUnique({ where: { id: auth.monitorId } });
         if (!monitor) return NextResponse.json({
             data: null,
@@ -23,6 +25,7 @@ export async function POST(): Promise<NextResponse<APIResponse>> {
             success: false,
         });
 
+        //reset values and running state
         await database.monitor.update({
             where: { id: auth.monitorId },
             data: {
@@ -41,6 +44,8 @@ export async function POST(): Promise<NextResponse<APIResponse>> {
         });
 
     } catch (error) {
+
+        //catch errors
         return NextResponse.json({
             data: null,
             message: "Uncaught error",

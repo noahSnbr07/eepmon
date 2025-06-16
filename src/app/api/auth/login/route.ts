@@ -16,6 +16,7 @@ export async function POST(_request: NextRequest): Promise<NextResponse<APIRespo
     const secret = process.env.JWT_SECRET as string;
     const cookieStore = await cookies();
 
+    //check fields validity
     const validName: boolean = name !== null && name.length >= 4;
     const validPassword: boolean = password !== null && password.length >= 4;
 
@@ -27,6 +28,8 @@ export async function POST(_request: NextRequest): Promise<NextResponse<APIRespo
     });
 
     try {
+
+        //retrieve target user
         const target = await database.user.findUnique({ where: { name } });
 
         if (!target) return NextResponse.json({
@@ -36,6 +39,7 @@ export async function POST(_request: NextRequest): Promise<NextResponse<APIRespo
             status: 404,
         });
 
+        //check suspension state
         if (target.suspended) return NextResponse.json({
             success: false,
             data: null,
@@ -43,6 +47,7 @@ export async function POST(_request: NextRequest): Promise<NextResponse<APIRespo
             status: 403,
         });
 
+        //extract hash from user
         const { hash, ...userSafe } = target;
 
         const match: boolean = await compare(password, hash);
@@ -53,6 +58,7 @@ export async function POST(_request: NextRequest): Promise<NextResponse<APIRespo
             status: 403,
         });
 
+        //sign jwt
         const token = sign(
             userSafe,
             secret,
@@ -63,6 +69,7 @@ export async function POST(_request: NextRequest): Promise<NextResponse<APIRespo
             }
         );
 
+        //set jwt
         cookieStore.set({
             name: "eepmon-token",
             value: token,
@@ -82,6 +89,8 @@ export async function POST(_request: NextRequest): Promise<NextResponse<APIRespo
 
 
     } catch (error) {
+
+        //catch error
         return NextResponse.json({
             success: false,
             data: null,

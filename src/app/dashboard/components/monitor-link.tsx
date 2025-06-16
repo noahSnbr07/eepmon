@@ -13,8 +13,7 @@ export default async function MonitorLink({ running }: _props) {
         <Link
             href={"/monitor"}
             title="Monitor"
-            className="flex p-4 gap-4 bg-stack rounded-md items-center"
-        >
+            className="flex p-4 gap-4 bg-stack rounded-md items-center">
             <Clock opacity={.5} />
             <b className="opacity-50"> Open Monitor ({running ? "active" : "not active"}) </b>
         </Link>

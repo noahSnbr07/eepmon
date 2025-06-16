@@ -7,6 +7,7 @@ import { addMinutes } from "date-fns";
 
 export async function POST(): Promise<NextResponse<APIResponse>> {
 
+    //check authentication
     const auth = await getAuth();
     if (!auth) return NextResponse.json({
         data: null,
@@ -15,6 +16,7 @@ export async function POST(): Promise<NextResponse<APIResponse>> {
         success: false
     });
 
+    //retrieve target profile
     const profile = await database.profile.findUnique({ where: { id: auth.profileId }, select: { delay: true } });
     if (!profile) return NextResponse.json({
         data: null,
@@ -24,6 +26,8 @@ export async function POST(): Promise<NextResponse<APIResponse>> {
     });
 
     try {
+
+        //retrieve target monitor to start
         const target = await database.monitor.findUnique({ where: { id: auth.monitorId } });
         if (!target) return NextResponse.json({
             data: null,
@@ -32,8 +36,10 @@ export async function POST(): Promise<NextResponse<APIResponse>> {
             success: false
         });
 
+        //estimate future start time with delay
         const startTime: Date = addMinutes(new Date(), profile.delay * 60);
 
+        //stop monitor
         await database.monitor.update({
             where: { id: auth.monitorId },
             data: { started: startTime, running: true }
@@ -46,6 +52,8 @@ export async function POST(): Promise<NextResponse<APIResponse>> {
             success: true
         });
     } catch (error) {
+
+        //catch errors
         return NextResponse.json({
             data: null,
             message: "Uncaught error",

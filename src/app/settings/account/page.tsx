@@ -3,7 +3,6 @@
 import MutationButton from "@/utils/components/mutation-button";
 import { LogOut } from "lucide-react";
 
-
 export default async function page() {
 
     return (

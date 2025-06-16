@@ -5,7 +5,6 @@ import Link from "next/link";
 
 export default async function page() {
 
-
     return (
         <div className="size-full flex flex-col">
             {settingsEntries.map((setting: SettingsEntry) =>

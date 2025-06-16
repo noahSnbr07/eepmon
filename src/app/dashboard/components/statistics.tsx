@@ -12,6 +12,7 @@ export default async function Statistics({ logs }: _props) {
     const average = getAverageDuration({ logs });
     const averageFormatted = getFormattedDuration({ duration: average });
 
+    //calculate values from logs
     const sorted = logs.sort((log1, log2) => log1.duration - log2.duration);
     const shortest = sorted[0];
     const longest = sorted[sorted.length - 1];

@@ -9,6 +9,7 @@ interface _props {
 
 export default function Chart({ logs }: _props) {
 
+    //extract values from logs
     const data = logs.map(log => ({
         ...log,
         created: new Date(log.created).toLocaleDateString(),

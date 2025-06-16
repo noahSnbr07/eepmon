@@ -6,6 +6,7 @@ import { NextResponse } from 'next/server';
 import { differenceInSeconds } from "date-fns";
 export async function POST(): Promise<NextResponse<APIResponse>> {
 
+    //check authentication
     const auth = await getAuth();
     if (!auth) return NextResponse.json({
         data: null,
@@ -15,6 +16,8 @@ export async function POST(): Promise<NextResponse<APIResponse>> {
     });
 
     try {
+
+        //retrieve target monitor column
         const target = await database.monitor.findUnique({ where: { id: auth.monitorId } });
         if (!target) return NextResponse.json({
             data: null,
@@ -23,6 +26,7 @@ export async function POST(): Promise<NextResponse<APIResponse>> {
             success: false
         });
 
+        //check weather it's running
         if (!target.running) return NextResponse.json({
             data: null,
             message: "Monitor not running",
@@ -30,16 +34,18 @@ export async function POST(): Promise<NextResponse<APIResponse>> {
             success: false
         });
 
+        //calculate duration
         const duration = differenceInSeconds(new Date(), target.started);
         const start = target.started;
         const stop = target.stopped;
 
-
+        //update state
         await database.monitor.update({
             where: { id: auth.monitorId },
             data: { stopped: new Date(), running: false }
         });
 
+        //catch invalid duration
         const invalidDuration = duration <= 0;
         if (invalidDuration) return NextResponse.json({
             data: null,
@@ -48,6 +54,7 @@ export async function POST(): Promise<NextResponse<APIResponse>> {
             success: false
         });
 
+        //create new log
         const newLog = await database.log.create({
             data: {
                 duration,
@@ -66,6 +73,8 @@ export async function POST(): Promise<NextResponse<APIResponse>> {
         });
 
     } catch (error) {
+
+        //catch errors
         return NextResponse.json({
             data: null,
             message: "Uncaught error",

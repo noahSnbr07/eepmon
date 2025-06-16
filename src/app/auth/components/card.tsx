@@ -57,7 +57,6 @@ export default function Card() {
         setMessage(data.message);
 
         if (data.success) return router.push("/dashboard");
-
         setPending(false);
     }
 
