@@ -46,6 +46,14 @@ export async function POST(_request: NextRequest): Promise<NextResponse<APIRespo
             success: false,
         });
 
+        //check ownership
+        if (target.id !== auth.profileId) return NextResponse.json({
+            data: null,
+            message: "Ownership failure",
+            status: 403,
+            success: false,
+        });
+
         //update preferences
         await database.profile.update({
             where: { id: auth.profileId },

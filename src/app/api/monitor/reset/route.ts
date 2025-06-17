@@ -25,6 +25,14 @@ export async function POST(): Promise<NextResponse<APIResponse>> {
             success: false,
         });
 
+        if (monitor.id !== auth.monitorId) return NextResponse.json({
+            data: null,
+            message: "Ownership failed",
+            status: 403,
+            success: false
+        });
+
+
         //reset values and running state
         await database.monitor.update({
             where: { id: auth.monitorId },

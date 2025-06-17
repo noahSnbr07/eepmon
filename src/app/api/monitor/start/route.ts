@@ -36,6 +36,13 @@ export async function POST(): Promise<NextResponse<APIResponse>> {
             success: false
         });
 
+        if (target.id !== auth.monitorId) return NextResponse.json({
+            data: null,
+            message: "Ownership failed",
+            status: 403,
+            success: false
+        });
+
         //estimate future start time with delay
         const startTime: Date = addMinutes(new Date(), profile.delay * 60);
 

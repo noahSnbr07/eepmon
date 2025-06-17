@@ -26,6 +26,14 @@ export async function POST(): Promise<NextResponse<APIResponse>> {
             success: false
         });
 
+        //check ownership
+        if (target.id !== auth.monitorId) return NextResponse.json({
+            data: null,
+            message: "Ownership failed",
+            status: 403,
+            success: false
+        });
+
         //check weather it's running
         if (!target.running) return NextResponse.json({
             data: null,
