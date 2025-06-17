@@ -1,7 +1,7 @@
 'use server';
 
 import MutationButton from "@/utils/components/mutation-button";
-import { LogOut } from "lucide-react";
+import { LogOut, Trash } from "lucide-react";
 
 export default async function page() {
 
@@ -12,6 +12,12 @@ export default async function page() {
                 endpoint="/api/auth/logout"
                 icon={<LogOut />}
                 name="Logout Session"
+            />
+            <MutationButton
+                reload
+                endpoint="/api/auth/delete"
+                icon={<Trash />}
+                name="Delete Account"
             />
         </div>
     );
