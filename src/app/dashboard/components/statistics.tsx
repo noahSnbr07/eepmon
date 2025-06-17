@@ -2,6 +2,7 @@
 
 import getAverageDuration from "@/functions/get-average-duration";
 import getFormattedDuration from "@/functions/get-formatted-duration";
+import getTotalSleepDuration from "@/functions/get-total-sleep-duration";
 import { Log } from "@prisma/client";
 
 interface _props {
@@ -16,6 +17,7 @@ export default async function Statistics({ logs }: _props) {
     const sorted = logs.sort((log1, log2) => log1.duration - log2.duration);
     const shortest = sorted[0];
     const longest = sorted[sorted.length - 1];
+    const total = getTotalSleepDuration({ logs });
 
     return (
         <div className="rounded-lg border-stack border-2">
@@ -42,6 +44,10 @@ export default async function Statistics({ logs }: _props) {
                     <tr>
                         <td className="px-4 py-2">Total Logs</td>
                         <td className="px-4 py-2">{logs.length}</td>
+                    </tr>
+                    <tr>
+                        <td className="px-4 py-2">Total Duration</td>
+                        <td className="px-4 py-2">{total}</td>
                     </tr>
                 </tbody>
             </table>
