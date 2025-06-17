@@ -24,5 +24,6 @@ export const config = {
         "/monitor",
         "/api/monitor/:path*",
         "/api/profile/update",
+        "/api/auth/delete",
     ],
 }
