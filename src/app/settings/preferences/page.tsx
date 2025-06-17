@@ -14,6 +14,7 @@ export default async function page() {
     return (
         <div className="size-full">
             <Card
+                defaultLogCap={data?.logsLimit || 0}
                 defaultDelay={data?.delay || 0}
                 defaultMin={data?.min || 4}
                 defaultMax={data?.max || 6}

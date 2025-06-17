@@ -20,6 +20,9 @@ const schema = zod.object({
     delay: zod.coerce.number()
         .min(0, { message: "Minimum is 0 hours" })
         .max(1, { message: "Maximum is 1 hour" }),
+    logCap: zod.coerce.number()
+        .min(0, { message: "Minimum is 1 log" })
+        .max(31, { message: "Maximum is 31 logs" }),
 });
 
 type FormData = zod.infer<typeof schema>;
@@ -29,9 +32,10 @@ interface _props {
     defaultPreferred: number;
     defaultMax: number;
     defaultDelay: number;
+    defaultLogCap: number;
 }
 
-export default function Card({ defaultMin, defaultPreferred, defaultMax, defaultDelay }: _props) {
+export default function Card({ defaultMin, defaultPreferred, defaultMax, defaultDelay, defaultLogCap }: _props) {
     const {
         register,
         handleSubmit,
@@ -44,6 +48,7 @@ export default function Card({ defaultMin, defaultPreferred, defaultMax, default
             preferredHours: defaultPreferred,
             maxHours: defaultMax,
             delay: defaultDelay,
+            logCap: defaultLogCap,
         }
     });
 
@@ -62,6 +67,7 @@ export default function Card({ defaultMin, defaultPreferred, defaultMax, default
         form.append("preferred", String(formData.preferredHours));
         form.append("max", String(formData.maxHours));
         form.append("delay", String(formData.delay));
+        form.append("cap", String(formData.logCap));
 
         //define fetch parameters
         const url = "/api/profile/update";
@@ -87,7 +93,7 @@ export default function Card({ defaultMin, defaultPreferred, defaultMax, default
                     max={8}
                     {...register("minHours")}
                     type="range" />
-                {errors.minHours && <i className="text-red-500 text-sm"> {errors.minHours.message} </i>}
+                {errors.minHours && <i className="text-red-500 text-sm"> {errors.minHours?.message} </i>}
             </div>
             <div className="rounded-md flex flex-col gap-2 bg-stack p-4">
                 <label htmlFor="preferredHours">Preferred Hours: {formValues.preferredHours}</label>
@@ -107,7 +113,7 @@ export default function Card({ defaultMin, defaultPreferred, defaultMax, default
                     max={8}
                     {...register("maxHours")}
                     type="range" />
-                {errors.maxHours && <i className="text-red-500 text-sm"> {errors.maxHours.message} </i>}
+                {errors.maxHours && <i className="text-red-500 text-sm"> {errors.maxHours?.message} </i>}
             </div>
             <div className="rounded-md flex flex-col gap-2 bg-stack p-4">
                 <label htmlFor="maxHours">Monitor Delay: {formValues.delay}</label>
@@ -118,7 +124,17 @@ export default function Card({ defaultMin, defaultPreferred, defaultMax, default
                     max={1}
                     {...register("delay")}
                     type="range" />
-                {errors.delay && <i className="text-red-500 text-sm"> {errors.delay.message} </i>}
+                {errors.delay && <i className="text-red-500 text-sm"> {errors.delay?.message} </i>}
+            </div>
+            <div className="rounded-md flex flex-col gap-2 bg-stack p-4">
+                <label htmlFor="maxHours">Log Load Limit: {formValues.logCap}</label>
+                <input
+                    defaultValue={defaultDelay}
+                    min={1}
+                    max={31}
+                    {...register("logCap")}
+                    type="range" />
+                {errors.delay && <i className="text-red-500 text-sm"> {errors.logCap?.message} </i>}
             </div>
             <div className="p-4 bg-stack rounded-md">
                 <h3 className="font-bold mb-2">Current Values:</h3>
@@ -126,6 +142,7 @@ export default function Card({ defaultMin, defaultPreferred, defaultMax, default
                 <p>Preferred: {defaultPreferred} hours</p>
                 <p>Maximum: {defaultMax} hours</p>
                 <p>Delay: {defaultDelay} hours</p>
+                <p>Log Load Limit: {defaultLogCap} hours</p>
             </div>
             <button
                 className="p-4 bg-stack rounded-md font-bold"
