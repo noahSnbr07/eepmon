@@ -15,7 +15,7 @@ export default async function Recent({ logs }: _props) {
                 <div
                     key={_index}
                     className="odd:bg-stack first:rounded-t-lg last:rounded-b-lg flex gap-2 py-2 px-4 justify-between items-center">
-                    <b> {getFormattedDuration({ duration: log.duration })} </b>
+                    <b> {getFormattedDuration({ duration: log.duration || 0 })} </b>
                     <i className="text-sm opacity-50">
                         {log.created.toLocaleDateString()}
                     </i>

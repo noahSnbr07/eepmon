@@ -35,11 +35,11 @@ export default async function Statistics({ logs }: _props) {
                     </tr>
                     <tr>
                         <td className="px-4 py-2">Shortest</td>
-                        <td className="px-4 py-2">{getFormattedDuration(shortest)}</td>
+                        <td className="px-4 py-2">{getFormattedDuration(shortest || 0)}</td>
                     </tr>
                     <tr>
                         <td className="px-4 py-2">Longest</td>
-                        <td className="px-4 py-2">{getFormattedDuration(longest)}</td>
+                        <td className="px-4 py-2">{getFormattedDuration(longest || 0)}</td>
                     </tr>
                     <tr>
                         <td className="px-4 py-2">Total Logs</td>
