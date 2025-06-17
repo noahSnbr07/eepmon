@@ -38,6 +38,7 @@ model Profile {
   preferred Int   @default(8)
   max       Int   @default(10)
   delay     Float @default(0)
+  logsLimit Int   @default(7)
 
   //relations 
   user User?

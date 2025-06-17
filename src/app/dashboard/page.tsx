@@ -15,12 +15,20 @@ export default async function page() {
 
     const auth = await getAuth();
 
+    const profile = await database.profile.findUnique({ where: { id: auth?.profileId } });
+    if (!profile) return <></>;
+
     const data = await database.user.findUnique({
         where: { id: auth?.id },
-        include: { logs: { orderBy: { created: "desc" } }, monitor: true },
+        include: {
+            logs: {
+                orderBy: {
+                    created: "desc"
+                }, take: profile.logsLimit
+            }, monitor: true
+        },
         omit: { hash: true }
     });
-
     if (!data) return <></>;
 
     return (
