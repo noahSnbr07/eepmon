@@ -5,6 +5,7 @@ import getAuth from "@/functions/get-auth";
 import MutationButton from "@/utils/components/mutation-button";
 import { DatabaseBackup } from "lucide-react";
 import { redirect } from "next/navigation";
+import NameInput from "./components/name-input";
 
 export default async function page() {
 
@@ -21,6 +22,7 @@ export default async function page() {
                 icon={<DatabaseBackup />}
                 name="Reset Monitor"
             />
+            <NameInput currentName={monitor.name} />
         </div>
     );
 }
