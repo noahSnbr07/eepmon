@@ -5,8 +5,10 @@ import { NextResponse, NextRequest } from 'next/server';
 
 export async function POST(_request: NextRequest): Promise<NextResponse<APIResponse>> {
 
+    //retrieve body
     const formData = await _request.formData();
 
+    //verify auth
     const auth = await getAuth();
     if (!auth) return NextResponse.json({
         data: null,
@@ -15,6 +17,7 @@ export async function POST(_request: NextRequest): Promise<NextResponse<APIRespo
         success: false
     });
 
+    //verify fields
     const newName = formData.get("name") as string;
     const validName = newName !== null && newName.length >= 4;
 
@@ -27,6 +30,7 @@ export async function POST(_request: NextRequest): Promise<NextResponse<APIRespo
 
     try {
 
+        //check wether target exists
         const target = await database.monitor.findMany({ where: { id: auth.monitorId } });
         if (!target) return NextResponse.json({
             data: null,
@@ -35,6 +39,7 @@ export async function POST(_request: NextRequest): Promise<NextResponse<APIRespo
             success: false
         });
 
+        //update target
         await database.monitor.update({ where: { id: auth.monitorId }, data: { name: newName } });
         return NextResponse.json({
             data: null,
@@ -43,6 +48,8 @@ export async function POST(_request: NextRequest): Promise<NextResponse<APIRespo
             success: true,
         });
     } catch (error) {
+
+        //catch error
         return NextResponse.json({
             data: null,
             message: "Uncaught error",
