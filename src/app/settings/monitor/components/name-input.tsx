@@ -1,32 +1,25 @@
 'use client';
 import APIResponse from "@/interfaces/api-response";
+import schema from "@/schemas/name-update-schema";
 import Spinner from "@/utils/components/spinner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { string, z as zod } from "zod";
+import { z as zod } from "zod";
 
 interface _props {
     currentName: string;
 }
-
-//create schema to validate form
-const formSchema = zod.object({
-    name: string()
-        .min(4, "Minimum Length: 4")
-        .max(24, "Max Length: 24")
-});
-
 //create type for form hook
-type formData = zod.infer<typeof formSchema>;
+type formData = zod.infer<typeof schema>;
 
 export default function NameInput({ currentName }: _props) {
 
     //submit, default values, error, resolver
     const { register, handleSubmit, formState: { errors } } = useForm<formData>({
-        resolver: zodResolver(formSchema),
+        resolver: zodResolver(schema),
         defaultValues: {
             name: currentName,
         }

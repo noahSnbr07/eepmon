@@ -7,16 +7,7 @@ import { useState } from 'react';
 import APIResponse from '@/interfaces/api-response';
 import { ClipLoader } from 'react-spinners';
 import { useRouter } from 'next/navigation';
-
-//define valid schema
-const schema = zod.object({
-    name: zod.string()
-        .min(4, 'Minimum Characters: 4')
-        .max(24, 'Maximum Characters: 24'),
-    password: zod.string()
-        .min(4, 'Minimum Characters: 4')
-        .max(24, 'Maximum Characters: 24')
-});
+import schema from '@/schemas/auth-schema';
 
 //create dynamic form type
 type FormData = zod.infer<typeof schema>;
