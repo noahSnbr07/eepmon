@@ -1,7 +1,6 @@
 import database from '@/config/database';
 import getAuth from '@/functions/get-auth';
 import APIResponse from '@/interfaces/api-response';
-import { hash } from 'bcrypt';
 import { NextResponse, NextRequest } from 'next/server';
 
 export async function POST(_request: NextRequest): Promise<NextResponse<APIResponse>> {

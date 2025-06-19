@@ -10,7 +10,7 @@ import MutationButton from "@/utils/components/mutation-button";
 
 export default async function page() {
 
-    //retrieve related data
+    //retrieve related data 
     const auth = await getAuth();
     const monitor = await database.monitor.findUnique({ where: { id: auth?.monitorId } });
     const profile = await database.profile.findUnique({ where: { id: auth?.profileId } });
@@ -19,6 +19,7 @@ export default async function page() {
 
     return (
         <div className="size-full flex flex-col justify-evenly items-center gap-8">
+            <i className="opacity-50"> {monitor.name} </i>
             <Image
                 unoptimized
                 src={mario}
