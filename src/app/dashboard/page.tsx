@@ -10,7 +10,6 @@ import Statistics from "./components/statistics";
 import MonitorCommands from "./components/monitor-commands";
 import Chart from "./components/chart";
 import MinifiedLog from "@/interfaces/minified-log";
-
 export default async function page() {
 
     const auth = await getAuth();
