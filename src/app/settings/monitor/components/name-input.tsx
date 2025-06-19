@@ -47,7 +47,7 @@ export default function NameInput({ currentName }: _props) {
             const response = await fetch("/api/monitor/name/update", { method: "POST", body });
             const data: APIResponse = await response.json();
             toast(data.message);
-        } catch (error) {
+        } catch {
 
             //handle client errors
             toast("Client side error occurred - 4XX");
