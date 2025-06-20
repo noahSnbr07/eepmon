@@ -2,6 +2,7 @@
 
 import MutationButton from "@/utils/components/mutation-button";
 import { LogOut, Trash } from "lucide-react";
+import PasswordInput from "./components/password-input";
 
 export default async function page() {
 
@@ -19,6 +20,7 @@ export default async function page() {
                 icon={<Trash />}
                 name="Delete Account"
             />
+            <PasswordInput />
         </div>
     );
 }
