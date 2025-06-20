@@ -19,11 +19,12 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
     matcher: [
-        '/dashboard',
+        "/dashboard",
         "/settings",
         "/monitor",
         "/api/monitor/:path*",
         "/api/profile/update",
         "/api/auth/delete",
+        "/api/auth/update",
     ],
 }
