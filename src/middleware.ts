@@ -26,5 +26,6 @@ export const config = {
         "/api/profile/update",
         "/api/auth/delete",
         "/api/auth/update",
+        "/api/log/delete",
     ],
 }
