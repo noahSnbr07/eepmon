@@ -1,5 +1,7 @@
 import getFormattedDuration from "@/functions/get-formatted-duration";
+import MutationButton from "@/utils/components/mutation-button";
 import { Log } from "@prisma/client";
+import { Trash } from "lucide-react";
 
 interface _props {
     logs: Log[];
@@ -19,6 +21,13 @@ export default async function Recent({ logs }: _props) {
                     <i className="text-sm opacity-50">
                         {log.created.toLocaleDateString()}
                     </i>
+                    <MutationButton
+                        endpoint={`/api/log/delete/${log.id}`}
+                        name=""
+                        className="p-1 bg-stack rounded-sm"
+                        icon={<Trash opacity={.5} />}
+                        reload
+                    />
                 </div>
             )}
         </div>
