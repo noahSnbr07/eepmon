@@ -72,8 +72,8 @@ export default function Card({ defaultMin, defaultPreferred, defaultMax, default
                 <label htmlFor="minHours">Minimum Hours: {formValues.minHours}</label>
                 <input
                     defaultValue={defaultMin}
-                    min={4}
-                    max={8}
+                    min={2}
+                    max={14}
                     {...register("minHours")}
                     type="range" />
                 {errors.minHours && <i className="text-red-500 text-sm"> {errors.minHours?.message} </i>}
@@ -82,8 +82,8 @@ export default function Card({ defaultMin, defaultPreferred, defaultMax, default
                 <label htmlFor="preferredHours">Preferred Hours: {formValues.preferredHours}</label>
                 <input
                     defaultValue={defaultPreferred}
-                    min={4}
-                    max={8}
+                    min={2}
+                    max={14}
                     {...register("preferredHours")}
                     type="range" />
                 {errors.preferredHours && <i className="text-red-500 text-sm"> {errors.preferredHours.message} </i>}
@@ -92,8 +92,8 @@ export default function Card({ defaultMin, defaultPreferred, defaultMax, default
                 <label htmlFor="maxHours">Maximum Hours: {formValues.maxHours}</label>
                 <input
                     defaultValue={defaultMax}
-                    min={4}
-                    max={8}
+                    min={2}
+                    max={14}
                     {...register("maxHours")}
                     type="range" />
                 {errors.maxHours && <i className="text-red-500 text-sm"> {errors.maxHours?.message} </i>}
