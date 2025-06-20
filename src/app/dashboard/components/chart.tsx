@@ -26,6 +26,7 @@ export default function Chart({ logs }: _props) {
                     stroke="#7d7d7d40"
                     strokeDasharray="5 5" />
                 <XAxis
+                    angle={20}
                     textAnchor="start"
                     interval={0}
                     fontSize={12}
