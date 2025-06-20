@@ -2,14 +2,14 @@ import { z as zod } from "zod";
 
 const schema = zod.object({
     minHours: zod.coerce.number()
-        .min(4, { message: "Minimum is 4 hours" })
-        .max(8, { message: "Maximum is 8 hours" }),
+        .min(2, { message: "Minimum is 4 hours" })
+        .max(14, { message: "Maximum is 8 hours" }),
     preferredHours: zod.coerce.number()
-        .min(4, { message: "Minimum is 4 hours" })
-        .max(8, { message: "Maximum is 8 hours" }),
+        .min(2, { message: "Minimum is 4 hours" })
+        .max(14, { message: "Maximum is 8 hours" }),
     maxHours: zod.coerce.number()
-        .min(4, { message: "Minimum is 4 hours" })
-        .max(8, { message: "Maximum is 8 hours" }),
+        .min(2, { message: "Minimum is 4 hours" })
+        .max(14, { message: "Maximum is 8 hours" }),
     delay: zod.coerce.number()
         .min(0, { message: "Minimum is 0 hours" })
         .max(1, { message: "Maximum is 1 hour" }),
