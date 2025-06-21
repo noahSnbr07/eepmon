@@ -13,13 +13,16 @@ export default async function Recent({ logs }: _props) {
 
     return (
         <div className="flex flex-col">
-            {logs.slice(0, 5).map((log, _index) =>
+            {logs.slice(0, 5).map((log, _index) => {
+            const safeDuration = Number(log.duration) || 0;
+            const tempCreatedDate = new Date(log.created);
+            const finalCreatedDate = isNaN(tempCreatedDate.getTime()) ? new Date() : tempCreatedDate;
                 <div
                     key={_index}
                     className="odd:bg-stack first:rounded-t-lg last:rounded-b-lg flex gap-2 py-2 px-4 justify-between items-center">
-                    <b> {getFormattedDuration({ duration: log.duration || 0 })} </b>
+                    <b> {getFormattedDuration({ duration: safeDuartion || 0 })} </b>
                     <i className="text-sm opacity-50">
-                        {log.created.toLocaleDateString()}
+                        {finalCreatedDate}
                     </i>
                     <MutationButton
                         endpoint={`/api/log/delete/${log.id}`}
