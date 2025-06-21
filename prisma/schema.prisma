@@ -34,11 +34,12 @@ model Profile {
   updated DateTime @updatedAt
 
   //props
-  min       Int   @default(6)
-  preferred Int   @default(8)
-  max       Int   @default(10)
-  delay     Float @default(0)
-  logsLimit Int   @default(7)
+  name      String @default("My Profile")
+  min       Int    @default(6)
+  preferred Int    @default(8)
+  max       Int    @default(10)
+  delay     Float  @default(0)
+  logsLimit Int    @default(7)
 
   //relations 
   user User?
