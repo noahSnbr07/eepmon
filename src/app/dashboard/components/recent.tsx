@@ -13,7 +13,7 @@ export default async function Recent({ logs }: _props) {
 
     return (
         <div className="flex flex-col">
-            {logs.slice(0, 5).map((log, _index) =>
+            {logs.slice(0, 5).map((log, _index) => {
             const safeDuration = Number(log.duration) || 0;
             const tempCreatedDate = new Date(log.created);
             const finalCreatedDate = isNaN(tempCreatedDate.getTime()) ? new Date() : tempCreatedDate;
