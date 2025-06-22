@@ -48,8 +48,13 @@ export default function MutationButton({ name, icon, endpoint, className, reload
             disabled={pending}
             onClick={runMutation}
             className={className ? className : "bg-stack rounded-md p-4 gap-4 flex"}>
-            {icon && icon}
-            {pending ? <div className="flex-1"> <Spinner /> </div> : name}
+
+            {pending ? <div className="flex-1"> <Spinner /> </div> : (<>
+
+                {icon && icon}
+                {name}
+
+            </>)}
         </button>
     );
 }
