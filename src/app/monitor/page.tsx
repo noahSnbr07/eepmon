@@ -33,7 +33,7 @@ export default async function page() {
                 started={new Date(monitor.started).toISOString()} />
             <MutationButton
                 reload
-                className="p-4 w-xs text-center bg-stack rounded-full"
+                className="p-4 w-xs text-center font-bold bg-stack rounded-full"
                 name={monitor.running ? "Stop" : "Start"}
                 endpoint={`/api/monitor/${monitor.running ? "stop" : "start"}`}
             />
