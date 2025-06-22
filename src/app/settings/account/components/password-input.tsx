@@ -63,12 +63,12 @@ export default function PasswordInput() {
         >
             <div className="flex gap-4">
                 <input
+                    type="password"
                     className="bg-stack rounded-md flex-1 px-4 py-2"
                     placeholder="new password"
                     min={4}
                     max={24}
-                    {...register("password")}
-                    type="text" />
+                    {...register("password")} />
                 <button
                     disabled={pending}
                     style={{ opacity: pending ? .5 : 1 }}
