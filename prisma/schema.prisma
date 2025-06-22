@@ -16,6 +16,7 @@ model User {
   //props
   name      String  @unique
   hash      String
+  avatar    String  @default("💫")
   suspended Boolean @default(false)
   superuser Boolean @default(false)
   monitor   Monitor @relation(fields: [monitorId], references: [id])
