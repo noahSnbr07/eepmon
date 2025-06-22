@@ -125,7 +125,7 @@ export default function Card({ defaultMin, defaultPreferred, defaultMax, default
                 <p>Preferred: {defaultPreferred} hours</p>
                 <p>Maximum: {defaultMax} hours</p>
                 <p>Delay: {defaultDelay} hours</p>
-                <p>Log Load Limit: {defaultLogCap} hours</p>
+                <p>Log Load Limit: {defaultLogCap} logs</p>
             </div>
             <button
                 className="p-4 bg-stack rounded-md font-bold"
