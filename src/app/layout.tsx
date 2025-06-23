@@ -17,7 +17,13 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Eepmon",
   description: "Log your sleep pattern",
-  creator: "Eule"
+  creator: "Eule",
+  generator: "Next.js",
+  keywords: ["logging", "lifestyle", "health"],
+  robots: {
+    follow: true,
+    index: true,
+  }
 };
 
 export default function RootLayout({
