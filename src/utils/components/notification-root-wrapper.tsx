@@ -6,8 +6,9 @@ import { ToastContainer } from "react-toastify";
 interface _props {
     children: React.ReactNode;
 }
-export default function NotificationRootWrapper({ children }: _props) {
 
+//only use in root layout to enable notifications via package
+export default function NotificationRootWrapper({ children }: _props) {
     return (
         <>
             <ToastContainer

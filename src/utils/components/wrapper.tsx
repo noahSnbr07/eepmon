@@ -9,6 +9,7 @@ interface _props {
     children: React.ReactNode;
 }
 
+//wrap components ti render the navbar
 export default async function Wrapper({ children }: _props) {
 
     return (

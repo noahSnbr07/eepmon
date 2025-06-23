@@ -14,6 +14,7 @@ interface _props {
     reload?: boolean;
 }
 
+//globally usable to fetch api and rich feedback with pending states
 export default function MutationButton({ name, icon, endpoint, className, reload }: _props) {
 
     //track submission state
