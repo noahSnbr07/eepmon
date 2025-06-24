@@ -11,6 +11,7 @@ import MonitorCommands from "./components/monitor-commands";
 import Chart from "./components/chart";
 import MinifiedLog from "@/interfaces/minified-log";
 import LogCapInfo from "./components/log-cap-info";
+import ArchiveStateInfo from "./components/archive-state-info";
 export default async function page() {
 
     const auth = await getAuth();
@@ -55,6 +56,7 @@ export default async function page() {
                     name="Calculated Statistics">
                     <Statistics logs={data.logs} />
                 </CardWrapper>
+                <ArchiveStateInfo />
             </div>
         </Wrapper>
     );
