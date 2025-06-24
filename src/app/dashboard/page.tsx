@@ -10,6 +10,7 @@ import Statistics from "./components/statistics";
 import MonitorCommands from "./components/monitor-commands";
 import Chart from "./components/chart";
 import MinifiedLog from "@/interfaces/minified-log";
+import LogCapInfo from "./components/log-cap-info";
 export default async function page() {
 
     const auth = await getAuth();
@@ -33,6 +34,10 @@ export default async function page() {
     return (
         <Wrapper>
             <div className="flex flex-col gap-4 p-4 size-full">
+                <LogCapInfo
+                    logCap={profile.logsLimit}
+                    totalLogs={data.logs.length}
+                />
                 <CardWrapper
                     name="Monitor">
                     <MonitorLink running={data.monitor.running} />
